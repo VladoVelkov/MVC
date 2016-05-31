@@ -46,7 +46,7 @@ class Validator {
 		foreach($this->fields as $f) {
 			if($this->meta[$f][0]!='') {
 				if(!preg_match('((*UTF8)'.$this->meta[$f][0].')',$this->data[$f])) {
-					$errors[$f] = $this->meta[$f][1];
+					$errors['info'][$f] = $this->meta[$f][1];
 				}
 			}
 		}
