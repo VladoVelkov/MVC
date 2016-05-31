@@ -1,0 +1,1 @@
+[2016-05-31 19:08:27] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Multimedia' for key 'categories_name'
