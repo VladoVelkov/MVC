@@ -1,8 +1,7 @@
 # Simple PHP MVC (currently backend only)
 
-To use the MVC in your application you need PHP version 5.4 or higher. 
-To install just download the zip archive and unpack.
-To test, use some tool or browser extension to create GET and POST requests.
+To use the MVC in your application you need PHP version 5.4 or higher. To install, download the zip archive and unpack. 
+To test, set the configuration in example/app/config.php first and the use some tool or browser extension to create GET and POST requests.
 
 Frontend part is still TBD. When implemented, MVC will be configured to use it or not.
 This is the initial alpha version that still needs unit testing and error handling, so it is not recommended for use.
