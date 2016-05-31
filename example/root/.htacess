@@ -1,0 +1,18 @@
+php_value date.timezone Europe/Skopje
+
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{QUERY_STRING} cid=([0-9]+)
+RewriteRule ^products/$ index.php?module=products&action=index&cid=%1 [L] 
+
+RewriteCond %{REQUEST_METHOD} !POST
+RewriteRule  .?  -  [S=2]
+RewriteRule ^(categories|products|prices)/insert([\/]*)$ index.php?module=$1&action=insert [L]
+RewriteRule ^(categories|products|prices)/update/([0-9]+)([\/]*)$ index.php?module=$1&action=update&id=$2 
+
+RewriteCond %{REQUEST_METHOD} !GET
+RewriteRule  .?  -  [S=3]
+RewriteRule ^(categories|products|prices)([\/]*)$ index.php?module=$1&action=index [L]
+RewriteRule ^(categories|products|prices)/(index|add)([\/]*)$ index.php?module=$1&action=$2 [L]
+RewriteRule ^(categories|products|prices)/(edit|delete)/([0-9]+)([\/]*)$ index.php?module=$1&action=$2&id=$3 [L]
