@@ -24,12 +24,12 @@ class Validator {
 	protected $fields;
 	
 	/**
-     * Instantiate the validator object.
-     *
-     * @param array $field list of fields to be validated in data.
-	 * @param array $data data to work with
-	 * @param array $meta meta information about data
-     */
+     	* Instantiate the validator object.
+	*
+	* @param array $field list of fields to be validated in data.
+	* @param array $data data to work with
+	* @param array $meta meta information about data
+     	*/
 	public function __construct($data,$meta,$fields) {
 		$this->data = $data;
 		$this->meta = $meta;
@@ -37,10 +37,10 @@ class Validator {
 	}	
 	
 	/**
-     * For each field, match the appearance/format of field value in data using regular expression defined in meta.
-     *
-     * @return array $errors contain invalid fields and appropriate validation messages
-     */
+     	* For each field, match the appearance/format of field value in data using regular expression defined in meta.
+     	*
+     	* @return array $errors contain invalid fields and appropriate validation messages
+     	*/
 	public function validate() {
 		$errors = [];
 		foreach($this->fields as $f) {
