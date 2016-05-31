@@ -14,7 +14,7 @@ MODEL
 CONTROLLER
 - tries to select data from cache first, if not there select from database and save to cache
 - on changing data in database invalidate appropriate cache items
-- provides response to user in array with parameters, data and errors
+- creates response as array with parameters, data and errors
 
 CACHE
 - gets, sets and deletes cached data in JSON files
@@ -33,7 +33,6 @@ Simple application that uses MVC backend can be found in example folder
 
 Pimple
 - example application uses Pimple as dependency injection container / service provider
-- external dependencies can be also saved in lib folder, like lib/Pimple
 
 index.php
 - Mod rewrite rules in .htaccess file maps all requests to index.php
