@@ -21,47 +21,47 @@ class Controller {
 	protected $cache;	
 	
 	/**
-     * By default the controller works with model and database. 
-     * If some controller child class doesn't need model then override to return false.
-     * @return bool
-     */
+	* By default the controller works with model and database. 
+     	* If some controller child class doesn't need model then override to return false.
+     	* @return bool
+     	*/
 	public function hasModel() {
 		return true;	
 	}
 	
 	/**
-     * By default the controller works with cache files. 
-     * If some controller child class doesn't need cache then override to return false.
-     * @return bool
-     */
+     	* By default the controller works with cache files. 
+     	* If some controller child class doesn't need cache then override to return false.
+     	* @return bool
+     	*/
 	public function hasCache() {
 		return true;	
 	}
 	
 	/**
-     * Set Model object property when needed. 
-	 *
-	 * @param Model $model object property 
-     */
+     	* Set Model object property when needed. 
+	*
+	* @param Model $model object property 
+     	*/
 	public function setModel($model) {
 		$this->model = $model;	
 	}
 	
 	/**
-     * Set Cache object property when needed. 
-	 *
-	 * @param Cache $cache object property 
-     */
+     	* Set Cache object property when needed. 
+	*
+	* @param Cache $cache object property 
+     	*/
 	public function setCache($cache) {
 		$this->cache = $cache;	
 	}
 	
 	/**
-     * If content is saved in cache, then return it. 
-	 * If not then call function to count and select records from database
-	 *
-	 * @return array with data, parameters and errors 
-     */
+     	* If content is saved in cache, then return it. 
+	* If not then call function to count and select records from database
+	*
+	* @return array with data, parameters and errors 
+     	*/
 	public function index() {
 		$content = json_decode($this->cache->get(),true);
 		if($content!='') {
@@ -72,11 +72,11 @@ class Controller {
 	}
 
 	/**
-     * If content is saved in cache, then return it. 
-	 * If not then call function to select single record from database
-	 *
-	 * @return array with data, parameters and errors 
-     */
+     	* If content is saved in cache, then return it. 
+	* If not then call function to select single record from database
+	*
+	* @return array with data, parameters and errors 
+     	*/
 	public function edit() {
 		$content = json_decode($this->cache->get(),true);
 		if($content!='') {
@@ -86,10 +86,10 @@ class Controller {
 	}
 
 	/**
-     * Insert record in database and invalidate related cache items. 
-	 *
-	 * @return array with data, parameters and errors 
-     */
+     	* Insert record in database and invalidate related cache items. 
+	*
+	* @return array with data, parameters and errors 
+     	*/
 	public function insert() {
 		$newid = $this->model->insert();
 		$this->cache->invalidate();
@@ -97,10 +97,10 @@ class Controller {
 	}
 	
 	/**
-     * Update record in database and invalidate related cache items. 
-	 *
-	 * @return array with data, parameters and errors 
-     */
+     	* Update record in database and invalidate related cache items. 
+	*
+	* @return array with data, parameters and errors 
+     	*/
 	public function update() {
 		$affected = $this->model->update();
 		$this->cache->invalidate();
@@ -108,10 +108,10 @@ class Controller {
 	}
 	
 	/**
-     * Delete record in database and invalidate related cache items. 
-	 *
-	 * @return array with data, parameters and errors 
-     */
+     	* Delete record in database and invalidate related cache items. 
+	*
+	* @return array with data, parameters and errors 
+     	*/
 	public function delete() {
 		$affected = $this->model->delete();
 		$this->cache->invalidate();
@@ -119,10 +119,10 @@ class Controller {
 	}
 	
 	/**
-     * Call model to select data from database. If no errors put data in cache file. 
-	 *
-	 * @return $output array with model data, parameters and errors
-     */
+     	* Call model to select data from database. If no errors put data in cache file. 
+	*
+	* @return $output array with model data, parameters and errors
+     	*/
 	private function select() {
 		$this->model->select();
 		$output = $this->response();
@@ -133,10 +133,10 @@ class Controller {
 	}
 	
 	/**
-     * Check for errors after model being asked to manage data in database. 
-	 *
-	 * @return bool
-     */
+     	* Check for errors after model being asked to manage data in database. 
+	*
+	* @return bool
+     	*/
 	private function hasErrors() {
 		$errors = $this->model->getErrors();
 		return count($errors)>0;
@@ -144,7 +144,7 @@ class Controller {
 	
 	/**
 	 * @return $output array with model data, parameters and errors
-     */
+     	*/
 	private function response($newid = 0,$affected = 0) {
 		if($this->hasErrors()) {
 			$report['status'] = 'ERROR';
