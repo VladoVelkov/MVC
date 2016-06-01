@@ -21,7 +21,7 @@ class Controller {
 	protected $cache;	
 	
 	/**
-	* By default the controller works with model and database. 
+     	* By default the controller works with model and database. 
      	* If some controller child class doesn't need model then override to return false.
      	* @return bool
      	*/
@@ -57,31 +57,30 @@ class Controller {
 	}
 	
 	/**
-     	* If content is saved in cache, then return it. 
-	* If not then call function to count and select records from database
+     	* Try to select data from cache 
+	*
+	* @return array with data, parameters and errors or empty
+     	*/
+	public function fromCache() {
+		return json_decode($this->cache->get(),true);
+	}
+
+	/**
+	* Count and select records from database
 	*
 	* @return array with data, parameters and errors 
      	*/
 	public function index() {
-		$content = json_decode($this->cache->get(),true);
-		if($content!='') {
-			return $content;
-		}
 		$this->model->count();
-		return $this->select();
+		return $this->select();	
 	}
 
 	/**
-     	* If content is saved in cache, then return it. 
-	* If not then call function to select single record from database
+     	* Select single record from database
 	*
 	* @return array with data, parameters and errors 
      	*/
 	public function edit() {
-		$content = json_decode($this->cache->get(),true);
-		if($content!='') {
-			return $content;
-		}
 		return $this->select();
 	}
 
@@ -143,7 +142,7 @@ class Controller {
 	}
 	
 	/**
-	 * @return $output array with model data, parameters and errors
+	* @return $output array with model data, parameters and errors
      	*/
 	private function response($newid = 0,$affected = 0) {
 		if($this->hasErrors()) {
