@@ -71,11 +71,6 @@ $app['controller'] = function($c) {
 	if($controller->hasCache()) {
 		$controller->setCache($c['cache']);
 	}
-	// controller uses model by default and model object is created on calling this function
-	// if no model needed then override hasModel() function in specific controller to return false
-	if($controller->hasModel()) {
-		$controller->setModel($c['model']);
-	}	
 	return $controller;
 };
 
@@ -98,9 +93,17 @@ if(count($errors)>0) {
 	// if validation errors then pack params, data and errors in output array
 	$output = ['params'=>$app['params'],'data'=>$app['data'],'report'=>['status'=>'ERROR','errors'=>$errors]];	
 } else {
-	// if no errors then instantiate controller object and call appropriate action for getting output array
+	// instantiate controller object and try to get data from cache
 	$ctrl = $app['controller'];
-	$output = call_user_func([$ctrl,$app['params']['action']]);	
+	$output = $ctrl->fromCache();
+	//if no data in cache set model and call appropriate action for getting output array
+	if($output=='') {
+		if($ctrl->hasModel()) {
+			$ctrl->setModel($app['model']);
+		}
+		$action = $app['params']['action'];
+		$output = call_user_func([$ctrl,$action]);	
+	}	
 }
 
 /*** RESPONSE ***/
