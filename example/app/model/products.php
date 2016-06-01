@@ -17,7 +17,7 @@ class ProductsModel extends Model {
 		$this->types = [
 			'id' => PDO::PARAM_INT,
 			'cid' => PDO::PARAM_INT
-		]	
+		];	
 	}
 	
 }
